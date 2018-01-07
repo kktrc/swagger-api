@@ -1,0 +1,19 @@
+{
+  "name": "swagger-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "swagger": "swagger project edit",
+    "gulp": "gulp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "js-yaml": "^3.10.0",
+    "opn": "^5.1.0"
+  }
+}
