@@ -3,8 +3,7 @@ var express = require('express');
 var app = express(); 
 var opn = require('opn'); 
 
-app.listen(3000, function () { 
-  opn('http://localhost:3000/api-doc');
+app.listen(7079, function () { 
   console.log('App listening on port 3000!');
 });
 
