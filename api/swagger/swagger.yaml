@@ -26,28 +26,45 @@ paths:
       - "列表页"
       summary: "列表页/搜索结果列表页接口"
       description: "列表页/搜索结果列表页接口"
+      consumes:
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
       - name: "openId"
-        in: "query"
+        in: "formData"
         description: "用户openId"
         required: true
         type: "string"
       - name: "lng"
-        in: "query"
+        in: "formData"
         description: "经度"
         required: true
         type: "number"
       - name: "lat"
-        in: "query"
+        in: "formData"
         description: "纬度"
         required: true
         type: "number"
       - name: "pageNow"
-        in: "query"
+        in: "formData"
         description: "经度"
         required: true
+        type: "number"
+      - name: "sort1"
+        in: "formData"
+        description: "经度"
+        required: true
+        type: "string"
+      - name: "sort2"
+        in: "formData"
+        description: "经度"
+        required: true
+        type: "string"
+      - name: "searchCon"
+        in: "formData"
+        description: "搜索关键词"
+        required: false
         type: "number"
       responses:
         405:
@@ -63,16 +80,15 @@ paths:
       summary: "列表页获取订单接口"
       description: ""
       consumes:
-      - "application/json"
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
+      - name: "openId"
+        in: "formData"
+        description: "用户openId"
         required: true
-        schema:
-          $ref: "#/definitions/Pet"
+        type: "string"
       responses:
         405:
           description: "Invalid input"
@@ -87,19 +103,29 @@ paths:
       summary: "搜索关键词联想接口"
       description: ""
       consumes:
-      - "application/json"
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
+      - name: "openId"
+        in: "formData"
+        description: "用户openId"
         required: true
-        schema:
-          $ref: "#/definitions/Pet"
+        type: "string"
+      - name: "searchCon"
+        in: "formData"
+        description: "搜索关键词"
+        required: true
+        type: "string"
       responses:
         405:
           description: "Invalid input"
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Pet"
       security:
       - petstore_auth:
         - "write:pets"
@@ -111,16 +137,15 @@ paths:
       summary: "门店详情页接口"
       description: ""
       consumes:
-      - "application/json"
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
+      - name: "shopId"
+        in: "formData"
+        description: "门店Id(商户Id+建店时间的MD5值)"
         required: true
-        schema:
-          $ref: "#/definitions/Pet"
+        type: "string"
       responses:
         405:
           description: "Invalid input"
@@ -135,16 +160,15 @@ paths:
       summary: "门店入口预约获取项目接口"
       description: ""
       consumes:
-      - "application/json"
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
+      - name: "shopId"
+        in: "formData"
+        description: "门店Id(商户Id+建店时间的MD5值)"
         required: true
-        schema:
-          $ref: "#/definitions/Pet"
+        type: "string"
       responses:
         405:
           description: "Invalid input"
@@ -159,16 +183,15 @@ paths:
       summary: "品牌详情页接口"
       description: ""
       consumes:
-      - "application/json"
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
+      - name: "brandId"
+        in: "formData"
+        description: "品牌Id(品牌Id + 建店时间的MD5值)"
         required: true
-        schema:
-          $ref: "#/definitions/Pet"
+        type: "string"
       responses:
         405:
           description: "Invalid input"
@@ -183,16 +206,15 @@ paths:
       summary: "技师详情页接口"
       description: ""
       consumes:
-      - "application/json"
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
+      - name: "techId"
+        in: "formData"
+        description: "技师Id(技师id + 技师创建时间的MD5值)"
         required: true
-        schema:
-          $ref: "#/definitions/Pet"
+        type: "string"
       responses:
         405:
           description: "Invalid input"
@@ -207,16 +229,15 @@ paths:
       summary: "项目详情页接口"
       description: ""
       consumes:
-      - "application/json"
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
+      - name: "itemId"
+        in: "formData"
+        description: "项目Id(项目id + 项目创建时间的MD5值)"
         required: true
-        schema:
-          $ref: "#/definitions/Pet"
+        type: "string"
       responses:
         405:
           description: "Invalid input"
@@ -227,113 +248,148 @@ paths:
   /getBookCon:
     post:
       tags:
-      - "user"
-      summary: "Create user"
-      description: "This can only be done by the logged in user."
-      operationId: "createUser"
+      - "下单"
+      summary: "下单获取前置条件接口"
+      description: "下单获取前置条件接口"
+      consumes:
+      - "application/x-www-form-urlencoded"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Created user object"
+      - name: "shopId"
+        in: "formData"
+        description: "门店Id(商户Id+建店时间的MD5值)"
         required: true
-        schema:
-          $ref: "#/definitions/User"
+        type: "string"
       responses:
         default:
           description: "successful operation"
   /getBookTimes:
     post:
       tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithArrayInput"
+      - "下单"
+      summary: "获取可预订时间点接口"
+      description: "获取可预订时间点接口"
+      consumes:
+      - "application/x-www-form-urlencoded"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
+      - name: "shopId"
+        in: "formData"
+        description: "门店Id(商户Id+建店时间的MD5值)"
         required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
+        type: "string"
+      - name: "peopleCount"
+        in: "formData"
+        description: "门店Id(商户Id+建店时间的MD5值)"
+        required: true
+        type: "string"
+      - name: "bookDay"
+        in: "formData"
+        description: "门店Id(商户Id+建店时间的MD5值)"
+        required: true
+        type: "string"
+      - name: "bookDetail"
+        in: "formData"
+        description: "预约客次和人数json数组"
+        required: true
+        type: "string"
       responses:
         default:
           description: "successful operation"
   /checkTimeStock:
     post:
       tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithListInput"
+      - "下单"
+      summary: "校验时间点库存接口"
+      description: "校验时间点库存接口"
+      consumes:
+      - "application/x-www-form-urlencoded"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
+      - name: "shopId"
+        in: "formData"
+        description: "门店Id(商户Id+建店时间的MD5值)"
         required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
+        type: "string"
+      - name: "peopleCount"
+        in: "formData"
+        description: "门店Id(商户Id+建店时间的MD5值)"
+        required: true
+        type: "string"
+      - name: "bookDay"
+        in: "formData"
+        description: "门店Id(商户Id+建店时间的MD5值)"
+        required: true
+        type: "string"
+      - name: "bookDetail"
+        in: "formData"
+        description: "预约客次和人数json数组"
+        required: true
+        type: "string"
       responses:
         default:
           description: "successful operation"
   /book:
-    get:
+    post:
       tags:
-      - "user"
-      summary: "Logs user into the system"
-      description: ""
-      operationId: "loginUser"
+      - "下单"
+      summary: "下单接口"
+      description: "下单接口"
+      consumes:
+      - "application/x-www-form-urlencoded"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - name: "username"
-        in: "query"
-        description: "The user name for login"
+      - name: "shopId"
+        in: "formData"
+        description: "门店Id(商户Id+建店时间的MD5值)"
         required: true
         type: "string"
-      - name: "password"
-        in: "query"
-        description: "The password for login in clear text"
+      - name: "peopleCount"
+        in: "formData"
+        description: "门店Id(商户Id+建店时间的MD5值)"
+        required: true
+        type: "string"
+      - name: "bookTime"
+        in: "formData"
+        description: "到店时间点"
+        required: true
+        type: "string"
+      - name: "price"
+        in: "formData"
+        description: "项目金额"
+        required: true
+        type: "string"
+      - name: "shifuMoney"
+        in: "formData"
+        description: "实付金额"
+        required: true
+        type: "string"
+      - name: "payType"
+        in: "formData"
+        description: "支付类型： 1: 在线支付 2：到店支付"
+        required: true
+        type: "integer"
+      - name: "bookDetail"
+        in: "formData"
+        description: "预约客次和人数json数组"
         required: true
         type: "string"
       responses:
         200:
           description: "successful operation"
-          schema:
-            type: "string"
-          headers:
-            X-Rate-Limit:
-              type: "integer"
-              format: "int32"
-              description: "calls per hour allowed by the user"
-            X-Expires-After:
-              type: "string"
-              format: "date-time"
-              description: "date in UTC when token expires"
-        400:
-          description: "Invalid username/password supplied"
   /getPayInfo:
-    get:
+    post:
       tags:
-      - "user"
-      summary: "Logs out current logged in user session"
-      description: ""
-      operationId: "logoutUser"
+      - "充值"
+      summary: "充值页面获取充值信息接口"
+      description: "充值页面获取充值信息接口"
+      consumes:
+      - "application/x-www-form-urlencoded"
       produces:
-      - "application/xml"
       - "application/json"
       parameters: []
       responses:
@@ -342,20 +398,19 @@ paths:
   /payMoney:
     post:
       tags:
-      - "项目详情"
-      summary: "项目详情页接口"
-      description: ""
+      - "充值"
+      summary: "提交充值接口"
+      description: "提交充值接口"
       consumes:
-      - "application/json"
+      - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
+      - name: "packageId"
+        in: "formData"
+        description: "套餐包Id"
         required: true
-        schema:
-          $ref: "#/definitions/Pet"
+        type: "string"
       responses:
         405:
           description: "Invalid input"
@@ -602,6 +657,44 @@ definitions:
         format: "int64"
       category:
         $ref: "#/definitions/Category"
+      name:
+        type: "string"
+        example: "doggie"
+      photoUrls:
+        type: "array"
+        xml:
+          name: "photoUrl"
+          wrapped: true
+        items:
+          type: "string"
+      tags:
+        type: "array"
+        xml:
+          name: "tag"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Tag"
+      status:
+        type: "string"
+        description: "pet status in the store"
+        enum:
+        - "available"
+        - "pending"
+        - "sold"
+    xml:
+      name: "Pet"
+  SearchKeywordResp:
+    type: "object"
+    required:
+    - "name"
+    - "photoUrls"
+    properties:
+      toast:
+        type: "string"
+        format: "int64"
+      errorNo:
+        type: "integer"
+        format: "int64"
       name:
         type: "string"
         example: "doggie"

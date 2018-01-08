@@ -1,643 +1,1126 @@
-swagger: "2.0"
-info:
-  description: "消费端接口文档1.0"
-  version: "1.0"
-  title: "消费端接口文档1.0"
-basePath: "/v2"
-tags:
-- name: "pet"
-  description: "Everything about your Pets"
-  externalDocs:
-    description: "Find out more"
-    url: "http://swagger.io"
-- name: "store"
-  description: "Access to Petstore orders"
-- name: "user"
-  description: "Operations about user"
-  externalDocs:
-    description: "Find out more about our store"
-    url: "http://swagger.io"
-schemes:
-- "https"
-paths:
-  /initList:
-    post:
-      tags:
-      - "列表页"
-      summary: "列表页/搜索结果列表页接口"
-      description: "列表页/搜索结果列表页接口"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "openId"
-        in: "query"
-        description: "用户openId"
-        required: true
-        type: "string"
-      - name: "lng"
-        in: "query"
-        description: "经度"
-        required: true
-        type: "number"
-      - name: "lat"
-        in: "query"
-        description: "纬度"
-        required: true
-        type: "number"
-      - name: "pageNow"
-        in: "query"
-        description: "经度"
-        required: true
-        type: "number"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /initGetOrders:
-    post:
-      tags:
-      - "列表页"
-      summary: "列表页获取订单接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /searchKeyword:
-    post:
-      tags:
-      - "列表页"
-      summary: "搜索关键词联想接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /shopDetail:
-    post:
-      tags:
-      - "门店"
-      summary: "门店详情页接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /shopOrderInit:
-    post:
-      tags:
-      - "门店"
-      summary: "门店入口预约获取项目接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /brandDetail:
-    post:
-      tags:
-      - "品牌详情"
-      summary: "品牌详情页接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /tech:
-    post:
-      tags:
-      - "技师详情"
-      summary: "技师详情页接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /item:
-    post:
-      tags:
-      - "项目详情"
-      summary: "项目详情页接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /getBookCon:
-    post:
-      tags:
-      - "user"
-      summary: "Create user"
-      description: "This can only be done by the logged in user."
-      operationId: "createUser"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Created user object"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-  /getBookTimes:
-    post:
-      tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithArrayInput"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-  /checkTimeStock:
-    post:
-      tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithListInput"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-  /book:
-    get:
-      tags:
-      - "user"
-      summary: "Logs user into the system"
-      description: ""
-      operationId: "loginUser"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "username"
-        in: "query"
-        description: "The user name for login"
-        required: true
-        type: "string"
-      - name: "password"
-        in: "query"
-        description: "The password for login in clear text"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            type: "string"
-          headers:
-            X-Rate-Limit:
-              type: "integer"
-              format: "int32"
-              description: "calls per hour allowed by the user"
-            X-Expires-After:
-              type: "string"
-              format: "date-time"
-              description: "date in UTC when token expires"
-        400:
-          description: "Invalid username/password supplied"
-  /getPayInfo:
-    get:
-      tags:
-      - "user"
-      summary: "Logs out current logged in user session"
-      description: ""
-      operationId: "logoutUser"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters: []
-      responses:
-        default:
-          description: "successful operation"
-  /payMoney:
-    post:
-      tags:
-      - "项目详情"
-      summary: "项目详情页接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /payStatus:
-    post:
-      tags:
-      - "项目详情"
-      summary: "项目详情页接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /payByBalance:
-    post:
-      tags:
-      - "项目详情"
-      summary: "项目详情页接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /getBookCoupons:
-    post:
-      tags:
-      - "项目详情"
-      summary: "项目详情页接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /getMyCoupons:
-    post:
-      tags:
-      - "项目详情"
-      summary: "项目详情页接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /activateCoupon:
-    post:
-      tags:
-      - "项目详情"
-      summary: "项目详情页接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /arrivalSure:
-    post:
-      tags:
-      - "确认到店"
-      summary: "项目详情页接口"
-      description: ""
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        405:
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-securityDefinitions:
-  petstore_auth:
-    type: "oauth2"
-    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
-    flow: "implicit"
-    scopes:
-      write:pets: "modify pets in your account"
-      read:pets: "read your pets"
-  api_key:
-    type: "apiKey"
-    name: "api_key"
-    in: "header"
-definitions:
-  Order:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      petId:
-        type: "integer"
-        format: "int64"
-      quantity:
-        type: "integer"
-        format: "int32"
-      shipDate:
-        type: "string"
-        format: "date-time"
-      status:
-        type: "string"
-        description: "Order Status"
-        enum:
-        - "placed"
-        - "approved"
-        - "delivered"
-      complete:
-        type: "boolean"
-        default: false
-    xml:
-      name: "Order"
-  Category:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Category"
-  User:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      username:
-        type: "string"
-      firstName:
-        type: "string"
-      lastName:
-        type: "string"
-      email:
-        type: "string"
-      password:
-        type: "string"
-      phone:
-        type: "string"
-      userStatus:
-        type: "integer"
-        format: "int32"
-        description: "User Status"
-    xml:
-      name: "User"
-  Tag:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Tag"
-  Pet:
-    type: "object"
-    required:
-    - "name"
-    - "photoUrls"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
-      name:
-        type: "string"
-        example: "doggie"
-      photoUrls:
-        type: "array"
-        xml:
-          name: "photoUrl"
-          wrapped: true
-        items:
-          type: "string"
-      tags:
-        type: "array"
-        xml:
-          name: "tag"
-          wrapped: true
-        items:
-          $ref: "#/definitions/Tag"
-      status:
-        type: "string"
-        description: "pet status in the store"
-        enum:
-        - "available"
-        - "pending"
-        - "sold"
-    xml:
-      name: "Pet"
-  ApiResponse:
-    type: "object"
-    properties:
-      code:
-        type: "integer"
-        format: "int32"
-      type:
-        type: "string"
-      message:
-        type: "string"
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+{
+ "swagger": "2.0",
+ "info": {
+  "description": "消费端接口文档1.0",
+  "version": "1.0",
+  "title": "消费端接口文档1.0"
+ },
+ "basePath": "/v2",
+ "tags": [
+  {
+   "name": "pet",
+   "description": "Everything about your Pets",
+   "externalDocs": {
+    "description": "Find out more",
+    "url": "http://swagger.io"
+   }
+  },
+  {
+   "name": "store",
+   "description": "Access to Petstore orders"
+  },
+  {
+   "name": "user",
+   "description": "Operations about user",
+   "externalDocs": {
+    "description": "Find out more about our store",
+    "url": "http://swagger.io"
+   }
+  }
+ ],
+ "schemes": [
+  "https"
+ ],
+ "paths": {
+  "/initList": {
+   "post": {
+    "tags": [
+     "列表页"
+    ],
+    "summary": "列表页/搜索结果列表页接口",
+    "description": "列表页/搜索结果列表页接口",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "openId",
+      "in": "formData",
+      "description": "用户openId",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "lng",
+      "in": "formData",
+      "description": "经度",
+      "required": true,
+      "type": "number"
+     },
+     {
+      "name": "lat",
+      "in": "formData",
+      "description": "纬度",
+      "required": true,
+      "type": "number"
+     },
+     {
+      "name": "pageNow",
+      "in": "formData",
+      "description": "经度",
+      "required": true,
+      "type": "number"
+     },
+     {
+      "name": "sort1",
+      "in": "formData",
+      "description": "经度",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "sort2",
+      "in": "formData",
+      "description": "经度",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "searchCon",
+      "in": "formData",
+      "description": "搜索关键词",
+      "required": false,
+      "type": "number"
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/initGetOrders": {
+   "post": {
+    "tags": [
+     "列表页"
+    ],
+    "summary": "列表页获取订单接口",
+    "description": "",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "openId",
+      "in": "formData",
+      "description": "用户openId",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/searchKeyword": {
+   "post": {
+    "tags": [
+     "列表页"
+    ],
+    "summary": "搜索关键词联想接口",
+    "description": "",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "openId",
+      "in": "formData",
+      "description": "用户openId",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "searchCon",
+      "in": "formData",
+      "description": "搜索关键词",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "successful operation",
+      "schema": {
+       "type": "array",
+       "items": {
+        "$ref": "#/definitions/Pet"
+       }
+      }
+     },
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/shopDetail": {
+   "post": {
+    "tags": [
+     "门店"
+    ],
+    "summary": "门店详情页接口",
+    "description": "",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "shopId",
+      "in": "formData",
+      "description": "门店Id(商户Id+建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/shopOrderInit": {
+   "post": {
+    "tags": [
+     "门店"
+    ],
+    "summary": "门店入口预约获取项目接口",
+    "description": "",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "shopId",
+      "in": "formData",
+      "description": "门店Id(商户Id+建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/brandDetail": {
+   "post": {
+    "tags": [
+     "品牌详情"
+    ],
+    "summary": "品牌详情页接口",
+    "description": "",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "brandId",
+      "in": "formData",
+      "description": "品牌Id(品牌Id + 建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/tech": {
+   "post": {
+    "tags": [
+     "技师详情"
+    ],
+    "summary": "技师详情页接口",
+    "description": "",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "techId",
+      "in": "formData",
+      "description": "技师Id(技师id + 技师创建时间的MD5值)",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/item": {
+   "post": {
+    "tags": [
+     "项目详情"
+    ],
+    "summary": "项目详情页接口",
+    "description": "",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "itemId",
+      "in": "formData",
+      "description": "项目Id(项目id + 项目创建时间的MD5值)",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/getBookCon": {
+   "post": {
+    "tags": [
+     "下单"
+    ],
+    "summary": "下单获取前置条件接口",
+    "description": "下单获取前置条件接口",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "shopId",
+      "in": "formData",
+      "description": "门店Id(商户Id+建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "default": {
+      "description": "successful operation"
+     }
+    }
+   }
+  },
+  "/getBookTimes": {
+   "post": {
+    "tags": [
+     "下单"
+    ],
+    "summary": "获取可预订时间点接口",
+    "description": "获取可预订时间点接口",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "shopId",
+      "in": "formData",
+      "description": "门店Id(商户Id+建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "peopleCount",
+      "in": "formData",
+      "description": "门店Id(商户Id+建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "bookDay",
+      "in": "formData",
+      "description": "门店Id(商户Id+建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "bookDetail",
+      "in": "formData",
+      "description": "预约客次和人数json数组",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "default": {
+      "description": "successful operation"
+     }
+    }
+   }
+  },
+  "/checkTimeStock": {
+   "post": {
+    "tags": [
+     "下单"
+    ],
+    "summary": "校验时间点库存接口",
+    "description": "校验时间点库存接口",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "shopId",
+      "in": "formData",
+      "description": "门店Id(商户Id+建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "peopleCount",
+      "in": "formData",
+      "description": "门店Id(商户Id+建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "bookDay",
+      "in": "formData",
+      "description": "门店Id(商户Id+建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "bookDetail",
+      "in": "formData",
+      "description": "预约客次和人数json数组",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "default": {
+      "description": "successful operation"
+     }
+    }
+   }
+  },
+  "/book": {
+   "post": {
+    "tags": [
+     "下单"
+    ],
+    "summary": "下单接口",
+    "description": "下单接口",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "shopId",
+      "in": "formData",
+      "description": "门店Id(商户Id+建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "peopleCount",
+      "in": "formData",
+      "description": "门店Id(商户Id+建店时间的MD5值)",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "bookTime",
+      "in": "formData",
+      "description": "到店时间点",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "price",
+      "in": "formData",
+      "description": "项目金额",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "shifuMoney",
+      "in": "formData",
+      "description": "实付金额",
+      "required": true,
+      "type": "string"
+     },
+     {
+      "name": "payType",
+      "in": "formData",
+      "description": "支付类型： 1: 在线支付 2：到店支付",
+      "required": true,
+      "type": "integer"
+     },
+     {
+      "name": "bookDetail",
+      "in": "formData",
+      "description": "预约客次和人数json数组",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "successful operation"
+     }
+    }
+   }
+  },
+  "/getPayInfo": {
+   "post": {
+    "tags": [
+     "充值"
+    ],
+    "summary": "充值页面获取充值信息接口",
+    "description": "充值页面获取充值信息接口",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [],
+    "responses": {
+     "default": {
+      "description": "successful operation"
+     }
+    }
+   }
+  },
+  "/payMoney": {
+   "post": {
+    "tags": [
+     "充值"
+    ],
+    "summary": "提交充值接口",
+    "description": "提交充值接口",
+    "consumes": [
+     "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "name": "packageId",
+      "in": "formData",
+      "description": "套餐包Id",
+      "required": true,
+      "type": "string"
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/payStatus": {
+   "post": {
+    "tags": [
+     "项目详情"
+    ],
+    "summary": "项目详情页接口",
+    "description": "",
+    "consumes": [
+     "application/json"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "in": "body",
+      "name": "body",
+      "description": "Pet object that needs to be added to the store",
+      "required": true,
+      "schema": {
+       "$ref": "#/definitions/Pet"
+      }
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/payByBalance": {
+   "post": {
+    "tags": [
+     "项目详情"
+    ],
+    "summary": "项目详情页接口",
+    "description": "",
+    "consumes": [
+     "application/json"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "in": "body",
+      "name": "body",
+      "description": "Pet object that needs to be added to the store",
+      "required": true,
+      "schema": {
+       "$ref": "#/definitions/Pet"
+      }
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/getBookCoupons": {
+   "post": {
+    "tags": [
+     "项目详情"
+    ],
+    "summary": "项目详情页接口",
+    "description": "",
+    "consumes": [
+     "application/json"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "in": "body",
+      "name": "body",
+      "description": "Pet object that needs to be added to the store",
+      "required": true,
+      "schema": {
+       "$ref": "#/definitions/Pet"
+      }
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/getMyCoupons": {
+   "post": {
+    "tags": [
+     "项目详情"
+    ],
+    "summary": "项目详情页接口",
+    "description": "",
+    "consumes": [
+     "application/json"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "in": "body",
+      "name": "body",
+      "description": "Pet object that needs to be added to the store",
+      "required": true,
+      "schema": {
+       "$ref": "#/definitions/Pet"
+      }
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/activateCoupon": {
+   "post": {
+    "tags": [
+     "项目详情"
+    ],
+    "summary": "项目详情页接口",
+    "description": "",
+    "consumes": [
+     "application/json"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "in": "body",
+      "name": "body",
+      "description": "Pet object that needs to be added to the store",
+      "required": true,
+      "schema": {
+       "$ref": "#/definitions/Pet"
+      }
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  },
+  "/arrivalSure": {
+   "post": {
+    "tags": [
+     "确认到店"
+    ],
+    "summary": "项目详情页接口",
+    "description": "",
+    "consumes": [
+     "application/json"
+    ],
+    "produces": [
+     "application/json"
+    ],
+    "parameters": [
+     {
+      "in": "body",
+      "name": "body",
+      "description": "Pet object that needs to be added to the store",
+      "required": true,
+      "schema": {
+       "$ref": "#/definitions/Pet"
+      }
+     }
+    ],
+    "responses": {
+     "405": {
+      "description": "Invalid input"
+     }
+    },
+    "security": [
+     {
+      "petstore_auth": [
+       "write:pets",
+       "read:pets"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "securityDefinitions": {
+  "petstore_auth": {
+   "type": "oauth2",
+   "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+   "flow": "implicit",
+   "scopes": {
+    "write:pets": "modify pets in your account",
+    "read:pets": "read your pets"
+   }
+  },
+  "api_key": {
+   "type": "apiKey",
+   "name": "api_key",
+   "in": "header"
+  }
+ },
+ "definitions": {
+  "Order": {
+   "type": "object",
+   "properties": {
+    "id": {
+     "type": "integer",
+     "format": "int64"
+    },
+    "petId": {
+     "type": "integer",
+     "format": "int64"
+    },
+    "quantity": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "shipDate": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "status": {
+     "type": "string",
+     "description": "Order Status",
+     "enum": [
+      "placed",
+      "approved",
+      "delivered"
+     ]
+    },
+    "complete": {
+     "type": "boolean",
+     "default": false
+    }
+   },
+   "xml": {
+    "name": "Order"
+   }
+  },
+  "Category": {
+   "type": "object",
+   "properties": {
+    "id": {
+     "type": "integer",
+     "format": "int64"
+    },
+    "name": {
+     "type": "string"
+    }
+   },
+   "xml": {
+    "name": "Category"
+   }
+  },
+  "User": {
+   "type": "object",
+   "properties": {
+    "id": {
+     "type": "integer",
+     "format": "int64"
+    },
+    "username": {
+     "type": "string"
+    },
+    "firstName": {
+     "type": "string"
+    },
+    "lastName": {
+     "type": "string"
+    },
+    "email": {
+     "type": "string"
+    },
+    "password": {
+     "type": "string"
+    },
+    "phone": {
+     "type": "string"
+    },
+    "userStatus": {
+     "type": "integer",
+     "format": "int32",
+     "description": "User Status"
+    }
+   },
+   "xml": {
+    "name": "User"
+   }
+  },
+  "Tag": {
+   "type": "object",
+   "properties": {
+    "id": {
+     "type": "integer",
+     "format": "int64"
+    },
+    "name": {
+     "type": "string"
+    }
+   },
+   "xml": {
+    "name": "Tag"
+   }
+  },
+  "Pet": {
+   "type": "object",
+   "required": [
+    "name",
+    "photoUrls"
+   ],
+   "properties": {
+    "id": {
+     "type": "integer",
+     "format": "int64"
+    },
+    "category": {
+     "$ref": "#/definitions/Category"
+    },
+    "name": {
+     "type": "string",
+     "example": "doggie"
+    },
+    "photoUrls": {
+     "type": "array",
+     "xml": {
+      "name": "photoUrl",
+      "wrapped": true
+     },
+     "items": {
+      "type": "string"
+     }
+    },
+    "tags": {
+     "type": "array",
+     "xml": {
+      "name": "tag",
+      "wrapped": true
+     },
+     "items": {
+      "$ref": "#/definitions/Tag"
+     }
+    },
+    "status": {
+     "type": "string",
+     "description": "pet status in the store",
+     "enum": [
+      "available",
+      "pending",
+      "sold"
+     ]
+    }
+   },
+   "xml": {
+    "name": "Pet"
+   }
+  },
+  "SearchKeywordResp": {
+   "type": "object",
+   "required": [
+    "name",
+    "photoUrls"
+   ],
+   "properties": {
+    "toast": {
+     "type": "string",
+     "format": "int64"
+    },
+    "errorNo": {
+     "type": "integer",
+     "format": "int64"
+    },
+    "name": {
+     "type": "string",
+     "example": "doggie"
+    },
+    "photoUrls": {
+     "type": "array",
+     "xml": {
+      "name": "photoUrl",
+      "wrapped": true
+     },
+     "items": {
+      "type": "string"
+     }
+    },
+    "tags": {
+     "type": "array",
+     "xml": {
+      "name": "tag",
+      "wrapped": true
+     },
+     "items": {
+      "$ref": "#/definitions/Tag"
+     }
+    },
+    "status": {
+     "type": "string",
+     "description": "pet status in the store",
+     "enum": [
+      "available",
+      "pending",
+      "sold"
+     ]
+    }
+   },
+   "xml": {
+    "name": "Pet"
+   }
+  },
+  "ApiResponse": {
+   "type": "object",
+   "properties": {
+    "code": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "type": {
+     "type": "string"
+    },
+    "message": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "externalDocs": {
+  "description": "Find out more about Swagger",
+  "url": "http://swagger.io"
+ }
+}

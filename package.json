@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "swagger": "swagger project edit --silent -p 7078",
+    "swagger": "swagger project edit",
     "gulp": "gulp"
   },
   "keywords": [],
